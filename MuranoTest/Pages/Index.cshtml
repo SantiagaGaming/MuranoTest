@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<h4 style="text-align:center">Find ten links app</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="@Model.Input" class="control-label">Type word to find here</label>
+                <input asp-for="@Model.Input" class="form-control" />
+                <div class="form-group">
+                    <input type="submit" value="Find" class="btn btn-dark" />
+                </div>
+
+        </form>
+        @if (@Model.Input != null)
+        {
+                <table>
+                <tr><th>Searching engine</th><th>Url</th><th>Description</th></tr>
+    @foreach (var item in Model.Urls)
+            {
+                    <tr><td>@item.SiteState.ToString()</td>
+                        <td><a href="@item.UrlText">@item.UrlText</a></td>
+                        <td>@item.Description</td></tr> <!--ряд с ячейками тела таблицы-->
+            }
+            </table>
+        }
+    </div>
+</div>
